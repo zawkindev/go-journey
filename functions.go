@@ -32,6 +32,18 @@ func tripleSum(a int) func(int) func(int) int {
 	}
 }
 
+func variadicFunc(s ...int) {
+	for i := 0; i < len(s); i++ {
+		fmt.Printf("%d\n", s[i])
+	}
+}
+
+func withDifferentTypes(list ...interface{}) {
+	for _, el := range list {
+		fmt.Println(el)
+	}
+}
+
 func main() {
 	x, y := calculate(3, 4)
 	fmt.Printf("area: %d, perimeter: %d\n", x, y)
@@ -49,5 +61,9 @@ func main() {
 	firstSum := partialSum(5)
 	fmt.Printf("\nPARTIAL SUM: %d", firstSum(5))
 
-	fmt.Printf("\nTRIPLEsum func: %d", tripleSum(3)(4)(7))
+	fmt.Printf("\nTRIPLEsum func: %d\n", tripleSum(3)(4)(7))
+
+	variadicFunc(1, 2, 3, 4, 5, 6)
+	withDifferentTypes("salom", 9879087, 4.323)
+
 }
