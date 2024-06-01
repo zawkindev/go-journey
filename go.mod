@@ -1,3 +1,3 @@
-module github.com/go-journey
+module go-journey
 
 go 1.22.3
