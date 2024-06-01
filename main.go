@@ -40,4 +40,20 @@ func main() {
 
 	var arr = [3]int{1,2,3}
 	fmt.Println(arr)
+
+	var sl = []int{3,1,1,4}
+	fmt.Println(sl[0:2])
+
+	fmt.Println("len: ",len(sl))
+
+	fmt.Println("cap: ",cap(sl))
+
+	fmt.Println("sl from arr: ", arr[0:2])
+
+	var msl = make([]int,4,8)
+
+
+	fmt.Println("msl len: ",len(msl))
+
+	fmt.Println("msl cap: ",cap(msl))
 }
