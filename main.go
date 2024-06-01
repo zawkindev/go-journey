@@ -35,25 +35,41 @@ func main() {
 	fmt.Println("\n##################Arrays###################")
 	a.TenZero()
 
-	var array [2]string = [2]string{"hi","bye"}
+	var array [2]string = [2]string{"hi", "bye"}
 	fmt.Println(array)
 
-	var arr = [3]int{1,2,3}
+	var arr = [3]int{1, 2, 3}
 	fmt.Println(arr)
 
-	var sl = []int{3,1,1,4}
+	var sl = []int{3, 1, 1, 4}
 	fmt.Println(sl[0:2])
 
-	fmt.Println("len: ",len(sl))
+	fmt.Println("len: ", len(sl))
 
-	fmt.Println("cap: ",cap(sl))
+	fmt.Println("cap: ", cap(sl))
 
 	fmt.Println("sl from arr: ", arr[0:2])
 
-	var msl = make([]int,4,8)
+	var msl = make([]int, 2, 8)
 
+	fmt.Println("msl len: ", len(msl))
 
-	fmt.Println("msl len: ",len(msl))
+	fmt.Println("msl cap: ", cap(msl))
 
-	fmt.Println("msl cap: ",cap(msl))
+	msl = append(msl, 20, 21)
+
+	fmt.Println("after append: ", msl)
+
+	new_msl := []int{12, 123123, 121233}
+
+	msl = append(msl, new_msl...)
+
+	fmt.Println("appending two slices: ", msl)
+
+	neededNums := msl[:len(msl)-3]
+	dest := make([]int, len(neededNums))
+
+	copy(neededNums,dest)
+
+	fmt.Println("copied nums: ", dest)
 }
