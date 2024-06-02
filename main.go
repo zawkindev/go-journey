@@ -97,4 +97,16 @@ func main() {
 	for k, v := range intStrMap {
 		fmt.Printf("%d: %s\n", k, v)
 	}
+
+	fmt.Println("\n################## Structs ###################")
+
+	type waifu struct {
+		name string
+		age  int
+	}
+
+	var megumi waifu = waifu{name: "Megumi", age: 18}
+	megumi.name = "Asuna"
+	fmt.Println(megumi)
+
 }
