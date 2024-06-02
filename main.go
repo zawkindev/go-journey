@@ -108,5 +108,4 @@ func main() {
 	var megumi waifu = waifu{name: "Megumi", age: 18}
 	megumi.name = "Asuna"
 	fmt.Println(megumi)
-
 }

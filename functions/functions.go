@@ -1,6 +1,10 @@
 package functions
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+	"os"
+)
 
 func Hello() {
 	fmt.Println("hello world")
@@ -46,4 +50,41 @@ func WithDifferentTypes(list ...interface{}) {
 	for _, el := range list {
 		fmt.Println(el)
 	}
+}
+
+func CopyFile(dstName, srcName string) (written int64, err error) {
+	src, err := os.Open(srcName)
+	if err != nil {
+		return
+	}
+
+	dst, err := os.Open(dstName)
+	if err != nil {
+		return
+	}
+
+	written, err = io.Copy(dst, src)
+
+	defer src.Close()
+	defer dst.Close()
+
+	return
+}
+
+func handlePanic() {
+	panicHappened := recover()
+
+	if panicHappened != nil {
+		fmt.Println("Panic happened already!\n")
+	}
+}
+
+func division(a, b int) int {
+	if b == 0 {
+		panic("Zero division error!")
+	}
+
+	defer handlePanic()
+
+	return a / b
 }
