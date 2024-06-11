@@ -2,10 +2,18 @@ package main
 
 import (
 	"fmt"
-	f "go-journey/functions"
-
 	a "go-journey/arrays"
+	f "go-journey/functions"
 )
+
+type waifu struct {
+	name string
+	age  int
+}
+
+func (w waifu) confess(who string) {
+	fmt.Printf("%s, isn't the moon beautiful?)\n", who)
+}
 
 func main() {
 
@@ -100,12 +108,9 @@ func main() {
 
 	fmt.Println("\n################## Structs ###################")
 
-	type waifu struct {
-		name string
-		age  int
-	}
-
 	var megumi waifu = waifu{name: "Megumi", age: 18}
 	megumi.name = "Asuna"
+
 	fmt.Println(megumi)
+	megumi.confess("Otabek")
 }
