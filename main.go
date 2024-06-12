@@ -6,6 +6,10 @@ import (
 	f "go-journey/functions"
 )
 
+type girl interface {
+	confess(who string)
+}
+
 type waifu struct {
 	name string
 	age  int
@@ -13,6 +17,20 @@ type waifu struct {
 
 func (w waifu) confess(who string) {
 	fmt.Printf("%s, isn't the moon beautiful?)\n", who)
+}
+
+type girlfriend struct {
+	name string
+	age  int
+}
+
+func (g girlfriend) confess(who string) {
+	fmt.Printf("%s, sorry...\n", who)
+}
+
+func tellIt(g girl, who string) {
+	fmt.Println(g)
+	g.confess(who)
 }
 
 func main() {
@@ -108,9 +126,9 @@ func main() {
 
 	fmt.Println("\n################## Structs ###################")
 
-	var megumi waifu = waifu{name: "Megumi", age: 18}
-	megumi.name = "Asuna"
+	megumi := waifu{name: "Megumi Kato", age: 18}
+	kawori := girlfriend{name: "Kawori Miyazono"}
 
-	fmt.Println(megumi)
-	megumi.confess("Otabek")
+	tellIt(megumi, "Otabek")
+	tellIt(kawori, "Shahruz")
 }
