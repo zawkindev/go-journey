@@ -33,6 +33,17 @@ func tellIt(g girl, who string) {
 	g.confess(who)
 }
 
+func printType(value interface{}) {
+	switch value.(type) {
+	case string:
+		fmt.Println("type of var is STRING.\n")
+	case int:
+		fmt.Println("type of var is INT.\n")
+	default:
+		fmt.Println("idk")
+	}
+}
+
 func main() {
 
 	//Functions and Packages
@@ -124,11 +135,16 @@ func main() {
 		fmt.Printf("%d: %s\n", k, v)
 	}
 
-	fmt.Println("\n################## Structs ###################")
+	fmt.Println("\n################## Structs & interfaces ###################")
 
 	megumi := waifu{name: "Megumi Kato", age: 18}
 	kawori := girlfriend{name: "Kawori Miyazono"}
 
 	tellIt(megumi, "Otabek")
 	tellIt(kawori, "Shahruz")
+
+	fmt.Println("\n################## Type Assertions ###################")
+	var value interface{} = "salom"
+	printType(value)
+
 }
