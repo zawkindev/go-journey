@@ -21,7 +21,6 @@ func (w waifu) confess(who string) {
 
 type girlfriend struct {
 	name string
-	age  int
 }
 
 func (g girlfriend) confess(who string) {
@@ -36,9 +35,9 @@ func tellIt(g girl, who string) {
 func printType(value interface{}) {
 	switch value.(type) {
 	case string:
-		fmt.Println("type of var is STRING.\n")
+		fmt.Println("type of var is STRING.")
 	case int:
-		fmt.Println("type of var is INT.\n")
+		fmt.Println("type of var is INT.")
 	default:
 		fmt.Println("idk")
 	}
@@ -146,5 +145,12 @@ func main() {
 	fmt.Println("\n################## Type Assertions ###################")
 	var value interface{} = "salom"
 	printType(value)
+
+	fmt.Println("\n################## Scan ###################")
+	var age int
+
+	fmt.Print("\nEnter your age: ")
+	fmt.Scan(&age)
+	fmt.Printf("You are %d years old.\n", age)
 
 }
