@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	a "go-journey/arrays"
 	f "go-journey/functions"
@@ -10,12 +11,12 @@ type girl interface {
 	confess(who string)
 }
 
-type waifu struct {
-	name string
-	age  int
+type Waifu struct {
+	Name string
+	Age  int
 }
 
-func (w waifu) confess(who string) {
+func (w Waifu) confess(who string) {
 	fmt.Printf("%s, isn't the moon beautiful?)\n", who)
 }
 
@@ -136,7 +137,7 @@ func main() {
 
 	fmt.Println("\n################## Structs & interfaces ###################")
 
-	megumi := waifu{name: "Megumi Kato", age: 18}
+	megumi := Waifu{Name: "Megumi Kato", Age: 18}
 	kawori := girlfriend{name: "Kawori Miyazono"}
 
 	tellIt(megumi, "Otabek")
@@ -152,5 +153,20 @@ func main() {
 	fmt.Print("\nEnter your age: ")
 	fmt.Scan(&age)
 	fmt.Printf("You are %d years old.\n", age)
+
+	fmt.Println("\n################## JSON ###################")
+
+	marsheled, err := json.Marshal(megumi)
+	if err != nil {
+		fmt.Println("error in marshalling")
+	}
+
+	var unmarsheled Waifu
+	err = json.Unmarshal(marsheled, &unmarsheled)
+	if err != nil {
+		fmt.Println("error in UNmarshalling")
+	}
+	fmt.Println(unmarsheled)
+	fmt.Println(megumi)
 
 }
