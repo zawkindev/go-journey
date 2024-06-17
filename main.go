@@ -5,6 +5,8 @@ import (
 	"fmt"
 	a "go-journey/arrays"
 	f "go-journey/functions"
+	"io/ioutil"
+	"log"
 )
 
 type girl interface {
@@ -169,4 +171,19 @@ func main() {
 	fmt.Println(unmarsheled)
 	fmt.Println(megumi)
 
+	fmt.Println("\n################## ioutil ###################")
+	filename := "test.txt"
+	txt := "just a test"
+	err = ioutil.WriteFile(filename, []byte(txt), 0777)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("test.txt file created.")
+	fmt.Println("cat test.txt:")
+	text, e := ioutil.ReadFile("test.txt")
+	if e != nil {
+		log.Fatal(e)
+	}
+	fmt.Print(string(text))
 }
