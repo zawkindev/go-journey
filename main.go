@@ -7,6 +7,7 @@ import (
 	f "go-journey/functions"
 	"io/ioutil"
 	"log"
+	"os"
 )
 
 type girl interface {
@@ -171,9 +172,10 @@ func main() {
 	fmt.Println(unmarsheled)
 	fmt.Println(megumi)
 
-	fmt.Println("\n################## ioutil ###################")
-	filename := "test.txt"
+	fmt.Println("\n################## ioutil & os ###################")
+	var filename string = "test.txt"
 	txt := "just a test"
+
 	err = ioutil.WriteFile(filename, []byte(txt), 0777)
 	if err != nil {
 		log.Fatal(err)
@@ -184,6 +186,23 @@ func main() {
 	text, e := ioutil.ReadFile("test.txt")
 	if e != nil {
 		log.Fatal(e)
+	}
+	fmt.Print(string(text))
+
+	fmt.Println("\nChange the content of the file")
+
+	file, error := os.OpenFile(filename, os.O_RDWR, 0777)
+	if error != nil {
+		fmt.Print(error)
+	}
+	file.Write([]byte("Hello World"))
+
+	file.Close()
+
+	fmt.Printf("cat %s\n", filename)
+	text, error_reading := os.ReadFile(filename)
+	if error_reading != nil {
+		log.Fatal(error_reading)
 	}
 	fmt.Print(string(text))
 }
