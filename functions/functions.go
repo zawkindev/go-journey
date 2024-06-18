@@ -94,3 +94,7 @@ func printSlice(sli []int) {
 		fmt.Printf("sli[%d] = %d", index, value)
 	}
 }
+
+func ApplyIt(some_func func(int) int, x int) int {
+	return some_func(x)
+}

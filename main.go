@@ -47,6 +47,16 @@ func printType(value interface{}) {
 	}
 }
 
+var funcvar func(int) int
+
+func inc(x int) int {
+	return x + 1
+}
+
+func dec(x int) int {
+	return x - 1
+}
+
 func main() {
 
 	//Functions and Packages
@@ -72,6 +82,14 @@ func main() {
 
 	f.VariadicFunc(1, 2, 3, 4, 5, 6)
 	f.WithDifferentTypes("salom", 9879087, 4.323)
+
+	funcvar = inc
+
+	fmt.Printf("function as variable -> funcvar(1): %d\n", funcvar(1))
+
+	fmt.Printf("function as argument -> ApplyIt(inc,1): %d\n", f.ApplyIt(inc, 1))
+	fmt.Printf("function as argument -> ApplyIt(dec,1): %d\n", f.ApplyIt(dec, 1))
+	fmt.Printf("anonymous function -> ApplyIt(anonymous_func,1): %d\n", f.ApplyIt(func(i int) int { return i * 10 }, 1))
 
 	// Arrays
 
