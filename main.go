@@ -19,6 +19,10 @@ type Waifu struct {
 	Age  int
 }
 
+func (w *Waifu) setName(name string) {
+	w.Name = name
+}
+
 func (w Waifu) confess(who string) {
 	fmt.Printf("%s, isn't the moon beautiful?)\n", who)
 }
@@ -158,7 +162,8 @@ func main() {
 
 	fmt.Println("\n################## Structs & interfaces ###################")
 
-	megumi := Waifu{Name: "Megumi Kato", Age: 18}
+	megumi := Waifu{Age: 18}
+	megumi.setName("Megumi Kato")
 	kawori := girlfriend{name: "Kawori Miyazono"}
 
 	tellIt(megumi, "Otabek")
