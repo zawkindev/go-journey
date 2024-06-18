@@ -88,3 +88,9 @@ func division(a, b int) int {
 
 	return a / b
 }
+
+func printSlice(sli []int) {
+	for index, value := range sli {
+		fmt.Printf("sli[%d] = %d", index, value)
+	}
+}
