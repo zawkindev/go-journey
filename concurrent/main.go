@@ -6,6 +6,7 @@ import (
 )
 
 var mutex sync.Mutex
+var once sync.Once
 
 func printToN(msg string, x int, wg *sync.WaitGroup) {
 	defer wg.Done()
@@ -22,15 +23,22 @@ func prod(a, b int, c chan int) {
 }
 
 func main() {
-	fmt.Println("########### WaitGroup ###########")
 	var wg sync.WaitGroup
 
+	fmt.Println("########### WaitGroup ###########")
+
 	wg.Add(1)
-	go printToN("goroutine: ", 1000, &wg)
+
+	go printToN("goroutine: ", 5, &wg)
+
 	wg.Wait()
 
 	for i := 0; i < 2; i++ {
 		go fmt.Println("main: ", i)
+
+		once.Do(func() {
+			fmt.Println("init")
+		})
 	}
 
 	fmt.Println("########### Channels ###########")
