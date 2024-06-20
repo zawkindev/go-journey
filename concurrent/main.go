@@ -30,11 +30,20 @@ func main() {
 
 	fmt.Println("########### Channels ###########")
 
-	c := make(chan int)
-	go prod(1, 2, c)
-	p1 := <-c
-	go prod(3, 4, c)
-	p2 := <-c
+	var p1, p2 int
+
+	c1 := make(chan int, 1)
+	c2 := make(chan int, 1)
+	go prod(1, 2, c1)
+	go prod(3, 4, c2)
+
+	select {
+	case p1 = <-c1:
+		fmt.Println("p1 recieved first")
+	case p2 = <-c2:
+		fmt.Println("p2 recieved first")
+	}
+
 	fmt.Println("4! = ", p1*p2)
 
 }
