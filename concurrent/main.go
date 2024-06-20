@@ -5,11 +5,16 @@ import (
 	"sync"
 )
 
+var mutex sync.Mutex
+
 func printToN(msg string, x int, wg *sync.WaitGroup) {
+	defer wg.Done()
+
+	mutex.Lock()
 	for i := 1; i <= x; i++ {
 		fmt.Println(msg, i)
 	}
-	wg.Done()
+	mutex.Unlock()
 }
 
 func prod(a, b int, c chan int) {
@@ -21,11 +26,11 @@ func main() {
 	var wg sync.WaitGroup
 
 	wg.Add(1)
-	go printToN("goroutine: ", 3, &wg)
+	go printToN("goroutine: ", 1000, &wg)
 	wg.Wait()
 
 	for i := 0; i < 2; i++ {
-		fmt.Println("main: ", i)
+		go fmt.Println("main: ", i)
 	}
 
 	fmt.Println("########### Channels ###########")
@@ -34,6 +39,7 @@ func main() {
 
 	c1 := make(chan int, 1)
 	c2 := make(chan int, 1)
+
 	go prod(1, 2, c1)
 	go prod(3, 4, c2)
 
