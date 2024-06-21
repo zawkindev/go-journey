@@ -1,8 +1,10 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"sync"
+	"time"
 )
 
 var mutex sync.Mutex
@@ -60,4 +62,21 @@ func main() {
 
 	fmt.Println("4! = ", p1*p2)
 
+	fmt.Println("########### Context ###########")
+
+	ctx := context.Background()
+
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
+
+	go func(ctx context.Context) {
+		select {
+		case <-time.After(1 * time.Second):
+			fmt.Println("Completed Successfully!!!")
+		case <-ctx.Done():
+			fmt.Println("Canceled or timed out: ", ctx.Err())
+		}
+	}(ctx)
+
+	time.Sleep(2*time.Second)
 }
