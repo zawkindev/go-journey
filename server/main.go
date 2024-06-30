@@ -21,6 +21,9 @@ func main() {
 	http.HandleFunc("/", serveFile)
 	http.HandleFunc("/info", showInfo)
 
+	files := http.FileServer(http.Dir("C:\\Users\\shahruz\\webserver\\www"))
+	http.Handle("/files/", http.StripPrefix("/files/", files))
+
 	err := http.ListenAndServe(":8999", nil)
 	if err != nil {
 		log.Fatal(err)
