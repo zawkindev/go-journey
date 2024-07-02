@@ -2,43 +2,31 @@ package main
 
 import (
 	"fmt"
-	"html"
-	"log"
 	"net/http"
-	"time"
 )
 
-func showInfo(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Current time: ", time.Now())
-	fmt.Fprintln(w, "Url path: ", html.EscapeString(r.URL.Path))
-}
-
-func serveFile(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "index.html")
-}
-
-func logger(next http.Handler) http.Handler {
+func middleware1(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		start := time.Now()
+		fmt.Fprintln(w, "Executing middleware: 1")
 		next.ServeHTTP(w, r)
-		fmt.Printf("%s %s %v\n", r.Method, r.URL.Path, time.Since(start))
+		fmt.Fprintln(w, "Executing middleware: 1 AGAIN")
 	})
+}
+
+func middleware2(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, "Executing middleware: 2")
+		next.ServeHTTP(w, r)
+		fmt.Fprintln(w, "Executing middleware: 2 AGAIN")
+	})
+}
+
+func final(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "final Middleware")
+	fmt.Fprintln(w, "Done!")
 }
 
 func main() {
-
-	finalHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello world")
-	})
-
-	http.HandleFunc("/", finalHandler)
-	http.HandleFunc("/info", showInfo)
-	http.Handle("/log", logger(finalHandler))
-
-	files := http.FileServer(http.Dir("C:\\Users\\shahruz\\webserver\\www"))
-	http.Handle("/files/", http.StripPrefix("/files/", files))
-	err := http.ListenAndServe(":8999", nil)
-	if err != nil {
-		log.Fatal(err)
-	}
+	http.Handle("/", middleware1(middleware2(http.HandlerFunc(final))))
+	http.ListenAndServe(":8999", nil)
 }

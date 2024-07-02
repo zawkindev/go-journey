@@ -177,7 +177,12 @@ func main() {
 	var age int
 
 	fmt.Print("\nEnter your age: ")
-	fmt.Scan(&age)
+
+	_, err := fmt.Scan(&age)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	fmt.Printf("You are %d years old.\n", age)
 
 	fmt.Println("\n################## JSON ###################")
