@@ -16,16 +16,25 @@ func pageHandler(w http.ResponseWriter, r *http.Request) {
 	filename := productID + ".html"
 
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
-		log.Printf("404: file not found")
-		filename = "404.html"
+		log.Println("404: file not found")
+		http.Redirect(w, r, "/404", http.StatusNotFound)
+		return
 	}
 
 	http.ServeFile(w, r, filename)
 }
 
+func notFoundHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotFound)
+	http.ServeFile(w, r, "404.html")
+}
+
 func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/product/{id:[0-9]+}", pageHandler)
+	router.HandleFunc("/404", notFoundHandler)
+	router.NotFoundHandler = http.HandlerFunc(notFoundHandler)
+
 	http.Handle("/", router)
 	http.ListenAndServe(":8999", nil)
 }
