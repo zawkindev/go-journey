@@ -75,11 +75,11 @@ func handlePanic() {
 	panicHappened := recover()
 
 	if panicHappened != nil {
-		fmt.Println("Panic happened already!\n")
+		fmt.Println("Panic happened already!")
 	}
 }
 
-func division(a, b int) int {
+func Division(a, b int) int {
 	if b == 0 {
 		panic("Zero division error!")
 	}
@@ -89,7 +89,7 @@ func division(a, b int) int {
 	return a / b
 }
 
-func printSlice(sli []int) {
+func PrintSlice(sli []int) {
 	for index, value := range sli {
 		fmt.Printf("sli[%d] = %d", index, value)
 	}

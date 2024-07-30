@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	al "go-journey/algorithms"
 	a "go-journey/arrays"
 	f "go-journey/functions"
 	"io/ioutil"
@@ -223,7 +224,11 @@ func main() {
 	if error != nil {
 		fmt.Print(error)
 	}
-	file.Write([]byte("Hello World"))
+
+	_, err = file.Write([]byte("Hello World"))
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	file.Close()
 
@@ -233,4 +238,10 @@ func main() {
 		log.Fatal(error_reading)
 	}
 	fmt.Print(string(text))
+
+	fmt.Println("\n################## algorithms ###################")
+
+	list := []int{1, 2, 3, 4, 5}
+	n := al.BinarySearch(list, 3)
+	fmt.Printf("BinarySearch(%v, 3): %d", list, n)
 }
