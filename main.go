@@ -240,8 +240,11 @@ func main() {
 	fmt.Print(string(text))
 
 	fmt.Println("\n################## algorithms ###################")
-
 	list := []int{1, 2, 3, 4, 5}
-	n := al.BinarySearch(list, 3)
-	fmt.Printf("BinarySearch(%v, 3): %d", list, n)
+	n := 3
+	i, err := al.BinarySearch(list, 3)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("BinarySearch(%v, %d): %d", list, n, i)
 }

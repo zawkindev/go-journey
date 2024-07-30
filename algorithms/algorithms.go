@@ -2,8 +2,12 @@ package algorithms
 
 import "fmt"
 
-func BinarySearch(list []int, n int) int {
+func BinarySearch(list []int, n int) (int, error) {
 	low, high := 0, len(list)-1
+
+	if list[low] > list[high] {
+		return -1, fmt.Errorf("unsorted array")
+	}
 
 	for low <= high {
 		median := (low + high) / 2
@@ -11,7 +15,7 @@ func BinarySearch(list []int, n int) int {
 
 		switch {
 		case current == n:
-			return median
+			return median, nil
 		case current < n:
 			low = median + 1
 		case current > n:
@@ -19,11 +23,5 @@ func BinarySearch(list []int, n int) int {
 		}
 	}
 
-	return -1
-}
-
-func main() {
-	list := []int{1, 2, 3, 4, 5}
-	n := BinarySearch(list, 3)
-	fmt.Println("index: ", n)
+	return -1, fmt.Errorf("algoritm failed")
 }
