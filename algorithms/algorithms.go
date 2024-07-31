@@ -25,3 +25,20 @@ func BinarySearch(list []int, n int) (int, error) {
 
 	return -1, fmt.Errorf("algoritm failed")
 }
+
+func SelectiveSort(list []int) []int {
+	newList := make([]int, len(list))
+	n := len(list)
+
+	for i := 0; i < n; i++ {
+		maxIndex := 0
+		for j := 1; j < len(list); j++ {
+			if list[j] > list[maxIndex] {
+				maxIndex = j
+			}
+		}
+		newList[i] = list[maxIndex]
+		list = append(list[:maxIndex], list[maxIndex+1:]...)
+	}
+	return newList
+}
