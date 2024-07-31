@@ -26,7 +26,7 @@ func BinarySearch(list []int, n int) (int, error) {
 	return -1, fmt.Errorf("algoritm failed")
 }
 
-func SelectiveSort(list []int) []int {
+func SelectionSort(list []int) []int {
 	newList := make([]int, len(list))
 	n := len(list)
 
