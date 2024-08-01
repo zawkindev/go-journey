@@ -241,10 +241,12 @@ func main() {
 
 	fmt.Println("\n################## algorithms ###################")
 	list := []int{1, 2, 3, 4, 5}
-	n := 3
+	n := 4
 	i, err := al.BinarySearch(list, 3)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("BinarySearch(%v, %d): %d", list, n, i)
+	fmt.Printf("BinarySearch(%v, %d): %d\n", list, n, i)
+
+	fmt.Printf("Factorial(%d): %d", n, al.Factorial(n))
 }

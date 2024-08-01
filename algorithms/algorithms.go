@@ -42,3 +42,11 @@ func SelectionSort(list []int) []int {
 	}
 	return newList
 }
+
+func Factorial(n int) int {
+	if n == 1 {
+		return n
+	} else {
+		return n * Factorial(n-1)
+	}
+}
