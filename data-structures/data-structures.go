@@ -2,6 +2,8 @@ package datastructures
 
 import "fmt"
 
+//  --------------- LINKED LIST ------------
+
 type Node struct {
 	value any
 	next  *Node
@@ -43,4 +45,37 @@ func (list *LinkedList) Delete(value any) error {
 		}
 	}
 	return nil
+}
+
+//  --------------- STACK ------------
+
+type Stack struct {
+	items []any
+}
+
+func (s *Stack) Push(item any) {
+	s.items = append(s.items, item)
+}
+
+func (s *Stack) Pop() error {
+	if size := len(s.items); size == 0 {
+		return fmt.Errorf("stack is empty!")
+	}
+	s.items = s.items[:len(s.items)-1]
+	return nil
+}
+
+func (s *Stack) Peek() (any, error) {
+	if len(s.items) == 0 {
+		return nil, fmt.Errorf("stack is empty!")
+	}
+	return s.items[0], nil
+}
+
+func (s *Stack) IsEmpty() bool {
+	return len(s.items) == 0
+}
+
+func (s *Stack) Size() int {
+	return len(s.items)
 }
