@@ -2,6 +2,10 @@ package algorithms
 
 import "fmt"
 
+type Numeric interface {
+	int | int32 | int64 | float32 | float64
+}
+
 func BinarySearch(list []int, n int) (int, error) {
 	low, high := 0, len(list)-1
 
@@ -56,5 +60,13 @@ func EKUB(a, b int) int { // The Euclidean algorithm
 		return a
 	} else {
 		return EKUB(b, a%b)
+	}
+}
+
+func Sum[T Numeric](list []T) T {
+	if len(list) == 1 {
+		return list[0]
+	} else {
+		return list[0] + Sum(list[1:])
 	}
 }

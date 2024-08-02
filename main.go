@@ -240,7 +240,7 @@ func main() {
 	fmt.Print(string(text))
 
 	fmt.Println("\n################## algorithms ###################")
-	list := []int{1, 2, 3, 4, 5}
+	list := []int{1, 2, 3, 4, 9}
 	n := 4
 	i, err := al.BinarySearch(list, 3)
 	if err != nil {
@@ -253,4 +253,6 @@ func main() {
 	a := 8
 	b := 16
 	fmt.Printf("EKUB(%d, %d): %d\n", a, b, al.EKUB(a, b))
+
+	fmt.Printf("Sum(%v): %v\n", list, al.Sum(list))
 }
