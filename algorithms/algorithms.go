@@ -50,3 +50,11 @@ func Factorial(n int) int {
 		return n * Factorial(n-1)
 	}
 }
+
+func EKUB(a, b int) int { // The Euclidean algorithm
+	if b == 0 {
+		return a
+	} else {
+		return EKUB(b, a%b)
+	}
+}

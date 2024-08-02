@@ -248,5 +248,9 @@ func main() {
 	}
 	fmt.Printf("BinarySearch(%v, %d): %d\n", list, n, i)
 
-	fmt.Printf("Factorial(%d): %d", n, al.Factorial(n))
+	fmt.Printf("Factorial(%d): %d\n", n, al.Factorial(n))
+
+	a := 8
+	b := 16
+	fmt.Printf("EKUB(%d, %d): %d\n", a, b, al.EKUB(a, b))
 }
