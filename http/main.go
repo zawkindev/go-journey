@@ -12,12 +12,16 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-  defer resp.Body.Close()
+	defer resp.Body.Close()
 
-  fmt.Println("status: ", resp.Status)
+	fmt.Println("status: ", resp.Status)
 
-  scanner := bufio.NewScanner(resp.Body)
-  for scanner.Scan(){
-    fmt.Println(scanner.Text())
-  }
+	scanner := bufio.NewScanner(resp.Body)
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+	}
+
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
 }
