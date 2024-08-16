@@ -1,32 +1,27 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"strings"
 )
 
-type AfterMiddleware struct {
-	handler http.Handler
-}
-
-func (a *AfterMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	a.handler.ServeHTTP(w, r)
-	_, err := w.Write([]byte(" +++ Hello from middleware! +++ \n"))
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-func myHandler(w http.ResponseWriter, r *http.Request) {
-	_, err := w.Write([]byte(" *** Hello from myHandler! *** \n"))
-	if err != nil {
-		log.Fatal(err)
+func sayHello(rw http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	fmt.Fprintln(rw, r.Form)
+	fmt.Fprintln(rw, r.Form)
+	fmt.Fprintln(rw, "path: ", r.URL.Path)
+	fmt.Fprintln(rw, "scheme: ", r.URL.Scheme)
+	for k, v := range r.Form {
+		fmt.Fprintln(rw, "key:", k)
+		fmt.Fprintln(rw, "val:", strings.Join(v, ", "))
 	}
 }
 
 func main() {
-	mid := &AfterMiddleware{http.HandlerFunc(myHandler)}
-	println("Listening on port 8999")
-	err := http.ListenAndServe(":8999", mid)
+	http.HandleFunc("/", sayHello)
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
