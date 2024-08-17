@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	al "go-journey/algorithms"
@@ -112,6 +113,17 @@ func main() {
 	fmt.Println("len: ", len(sl))
 	fmt.Println("cap: ", cap(sl))
 	fmt.Println("sl from arr: ", arr[0:2])
+
+	// Buffers
+
+	fmt.Println("\n################## Buffers ###################")
+
+	var b bytes.Buffer
+	b.WriteString("Hello")
+	b.WriteString(", World\n")
+	fmt.Fprint(&b)
+	b.WriteString("Bye world!\n")
+	fmt.Print(b.String())
 
 	// Slices
 
@@ -251,8 +263,8 @@ func main() {
 	fmt.Printf("Factorial(%d): %d\n", n, al.Factorial(n))
 
 	a := 8
-	b := 16
-	fmt.Printf("EKUB(%d, %d): %d\n", a, b, al.EKUB(a, b))
+	bb := 16
+	fmt.Printf("EKUB(%d, %d): %d\n", a, bb, al.EKUB(a, bb))
 
 	fmt.Printf("Sum(%v): %v\n", list, al.Sum(list))
 }
