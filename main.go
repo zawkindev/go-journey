@@ -162,6 +162,11 @@ func main() {
 	emptyMap["salom"] = "hi"
 	fmt.Println("after adding salom: ", emptyMap)
 
+	_, ok := emptyMap["salom"]
+	if ok {
+		fmt.Println("`salom` exists in emptyMap")
+	}
+
 	delete(emptyMap, "salom")
 	fmt.Println("again empty: ", emptyMap)
 
